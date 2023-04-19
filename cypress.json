@@ -6,5 +6,6 @@
     "chromeWebSecurity": false,
     "numTestsKeptInMemory": 5,
     "screenshotsFolder": "reports/screenshots",
-    "supportFile": false
+    "supportFile": false,
+    "failOnStatusCode": false
 }

@@ -56,10 +56,10 @@ Cypress.Commands.add('logar', (email, senha) => {
 Cypress.Commands.add('buscarUsuarioParaLogin', () => {
     cy.request('GET', '/usuarios').then(res => {
         expect(res.body).to.haveOwnProperty('usuarios')
-        var usuario
-        return usuario = {
+        return {
             email: res.body.usuarios[0].email,
-            senha: res.body.usuarios[0].password
+            senha: res.body.usuarios[0].passoword
         }
+        
     })
 })
