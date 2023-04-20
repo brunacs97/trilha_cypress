@@ -11,15 +11,17 @@ describe('Casos de teste sobre a rota /usuarios da API Serverest', () => {
    
     it('Deve buscar todos os usuarios cadastrados na Serverest', () => {
        Serverest.buscarUsuarios().then( res => {
+            cy.contractValidation(res, 'get-usuarios', 200)
            ValidaServerest.validarBuscaDeUsuarios(res)
 
        })
     })
 
     //realizando um post
-    it('Não deve postar um novo usuario administrador existente', () => {
+    it.only('Não deve postar um novo usuario administrador existente', () => {
         cy.postarUsuarioSemSucesso ().then( res =>  {
-            expect(res).to.be.a('object')
+            cy.contractValidation(res, 'post-usuarios', 400)
+            expect(res.body.message).to.be.eq('Este email já está sendo usado')
         })
     })
 
@@ -42,7 +44,7 @@ describe('Casos de teste sobre a rota /usuarios da API Serverest', () => {
     })
    
 
-    it.only('Deve buscar e salvar um usuário em um arquivo json', () => {
+    it('Deve buscar e salvar um usuário em um arquivo json', () => {
         let inteiro = Factory.gerarInteiroAleatorio()
         Serverest.buscarUsuarios().then( res => {
             cy.log(JSON.stringify(res.body.usuarios[0]))
@@ -51,7 +53,7 @@ describe('Casos de teste sobre a rota /usuarios da API Serverest', () => {
         })
     })
 
-    it.only('Deve buscar o usuário de um arquivo json', () =>{
+    it('Deve buscar o usuário de um arquivo json', () =>{
         cy.fixture('usuario.json').then(json =>{
             let usuario = {
                 email: json.email,
