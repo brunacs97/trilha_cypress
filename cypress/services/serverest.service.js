@@ -4,6 +4,7 @@
 
 import Serverest from '../services/serverest.service'
 import validaServerest from '../services/validaServerest.service'
+import Factory from '../fixtures/factory'
 
 const URL_USUARIOS = '/usuarios'
 const URL_LOGIN = '/login'
@@ -110,18 +111,14 @@ export default class ValidaServerest {
 // }
 
 static cadastrarProdutoComSucesso(){
+    let produto = Factory.gerarProduto()
     return cy.request({
         method: 'POST',
         url: 'https://serverest.dev/produtos', // baseUrl is prepend to URL
-        body: {
-            nome: 'teste',
-            preco:47, 
-            descricao: "Teste mouse",
-            quantidade: 7
-    },
+        body: produto,
+        failOnStatusCode: true,
     auth:{ bearer:Cypress.env("bearer")},
-    failOnStatusCode: true,
-  
+
 })
   
 }
