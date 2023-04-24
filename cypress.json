@@ -7,5 +7,16 @@
     "numTestsKeptInMemory": 5,
     "screenshotsFolder": "reports/screenshots",
     "supportFile": false,
-    "failOnStatusCode": false
+    "failOnStatusCode": false,
+    "reporter":"cypress-multi-reporters",
+        "reporterOptions": {
+        "reporterEnabled": "mochawesome",
+        "mochawesomeReporterOptions": {
+        "reportDir": "cypress/reports",
+        "quite": true,
+        "overwrite": false,
+        "html": false,
+        "json": true
+        }
+    }
 }
